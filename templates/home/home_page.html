@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load wagtailcore_tags%}
 {% load static %}
 
 {% block body_class %}template-homepage{% endblock %}
@@ -10,12 +11,13 @@ Delete the line below if you're just getting started and want to remove the welc
 {% endcomment %}
 <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
 {% endblock extra_css %}
-
+{%block title%}{{page.title}}{%endblock%}
 {% block content %}
+<h1>{{ page.title }}</h1>
+<p class="meta">{{ page.date }}</p>
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
-
-{% endblock content %}
+<div class="intro">{{ page.intro }}</div>
+{%for post in page.get_children%}
+<p><a href="{% pageurl post %}">child</a></p>
+{%endfor%}
+{% endblock %}

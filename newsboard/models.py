@@ -16,6 +16,8 @@ class NewsIndexPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('introduction')
     ]
+    subpage_types = ['newsboard.NewsPage']
+    parent_page_types = ['home.HomePage']
 
 
 class NewsPage(Page):
