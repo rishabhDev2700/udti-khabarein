@@ -1,8 +1,32 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags%}
+{% load wagtailimages_tags%}
 {% load static %}
 {%block title%}{{page.title}}{%endblock%}
 
 {%block content%}
-
+<div class="container mx-auto">
+    <div class="w-100">{%image page.cover min-100x200 %}</div>
+    <h2>{{page.title}}</h2>
+    <p>{{page.introduction}}</p>
+    <div class="">
+        {%for block in page.body%}
+        {% if block.block_type == 'image' %}
+            {% image block.value.image width-400 %}
+        {% else %}
+        {% include_block block %}
+        {% endif %}
+        {{field}}
+        {%endfor%}
+         {% if page.tags.count %}
+        <h1>Tags:</h1>
+        {% for tag in page.tags.all %}
+            {# Loop through all the existing tags #}
+            <a href="{{ self.get_parent.url }}?tag={{ tag.slug }}">{{ tag }}</a><br />
+        {% endfor %}
+    {% endif %}
+        <span class="display-6">Author- </span><span class="display-5">{{page.author}}</span>
+            <a class="badge badge-primary" href="{%pageurl page.get_parent %}">Back</a>
+    </div>
+</div>
 {%endblock%}

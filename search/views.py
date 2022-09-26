@@ -36,3 +36,7 @@ def search(request):
             "search_results": search_results,
         },
     )
+
+
+def custom_search(request):
+    search_query = request.GET.get('query',None)

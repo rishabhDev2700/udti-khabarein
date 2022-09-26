@@ -81,7 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "udti_khabarein.wsgi.application"
-
+TAGGIT_CASE_INSENSITIVE = True
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
