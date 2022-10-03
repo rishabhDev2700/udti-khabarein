@@ -3,15 +3,11 @@
 {% load wagtailcore_tags %}
 {% block title %}NewsIndex{% endblock %}
 {% block content %}
-<div class="container row row-cols-2 align-items-center mx-auto">
-{%for post in posts%}
+<div class="container align-items-center mx-auto">
+{%for post in page.get_children%}
 <a href="{%pageurl post%}" class="text-decoration-none text-dark">
-<div class="card my-3">
-    <span class="card-img img-thumbnail overflow-hidden">
-        {%image post.specific.cover fill-600x300%}
-    </span>
-   <span class="mx-3"> <span class="display-4 bg-dark text-light d-block text-center rounded p-3">{{post.title}}</span>
-    <div class="text-secondary fs-5 my-3 overflow-hidden">{{post.specific.introduction|truncatechars:60}}</div></span>
+<div class="my-3 border border-2 p-3">
+   <span>{%image post.cover min-100x100 %}</span><span> {{post.title}}</span>
 </div>
 </a>
 {%endfor%}

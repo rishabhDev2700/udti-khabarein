@@ -23,11 +23,12 @@ class NewsTag(TaggedItemBase):
 
 class NewsIndexPage(Page):
     introduction = models.CharField(max_length=250, blank=False, null=False)
-
+    cover = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     content_panels = Page.content_panels + [
-        FieldPanel('introduction')
+        FieldPanel('introduction'),
+        FieldPanel('cover'),
     ]
-    subpage_types = ['newsboard.NewsPage']
+    subpage_types = ['newsboard.NewsPage', 'newsboard.NewsIndexPage']
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
